@@ -1,0 +1,8 @@
+1)Establish the Tunnel: 
+ssh -f -N -L 49152:<IP of target>:22 userid@machine_ip => this means we are forwarding local port 49152 to ssh port(i.e. 22)
+
+2)Connect to target
+ssh -p <forwarded localport> root@localhost
+ Here, the forwarded local port would be 49152
+
+
