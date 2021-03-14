@@ -1,0 +1,24 @@
+1)You can do remote debugging via GDB.
+
+(a)Establish tunnel for GDB:
+
+To forward local port 49188 to gdb port, say 2345, then:
+ssh -f -N -L 49188:<IP of target>:2345 userid@machine_ip/name
+
+(b)In eclipse config, do the following:
+Host: localhost
+Port number: 49188
+
+©in target:
+gdbserver localhost:2345 <binary>
+
+But, above might be extremely slow if there are many intermediate hosts between your system and the final target.
+So, better thing to do is: connect to the system to which the target is connected via:
+
+sudo ssh -L localhost:49188:<IP of target>:2345 <IP of target> 
+
+Now, you can't use eclipse because you won't have the sources on this host machine where the target is connected to. So, you should run GDB from command line as:
+target remote localhost:49188
+
+2)You can get DLT logs.
+
