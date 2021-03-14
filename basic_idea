@@ -1,0 +1,16 @@
+Idea is that all the hardware are connected to one machine.
+
+All users who want to access the hardware are added to this machine with some credentials.
+
+That particular user will login to this machine as: userid@machine_ip and later give the password.
+
+Idea is to forward the local port of one's machine to the remote port of hardware. It is done by means of SSH tunnels. This enables easy access to hardware i.e. user need not have to do "ssh" to that machine and then to hardware, rather just ssh to the local port which is forwarded to the remote hardware.
+
+https://www.howtogeek.com/168145/how-to-use-ssh-tunneling/
+
+https://www.revsys.com/writings/quicktips/ssh-tunnel.html 
+
+NOTE: If network goes off and on, then kill the tunnel and re-establish the tunnel again.
+Give ps -aux and check for the PID of the tunnel command
+Kill -9 <PID>
+
