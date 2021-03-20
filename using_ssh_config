@@ -1,0 +1,28 @@
+This technique is useful when you have many intermeidate hosts between your PC and the final hardware.
+Idea is to modify the ~/.ssh/config file to seamlessly access the hardware.
+
+We furthermore need to add our SSH keys to SSH'S authorized_keys i.e.:
+cat <path_to_public_ssh_key> | ssh <1st intermediate host> 'cat >> .ssh/authorized_keys'
+cat <path_to_public_ssh_key> | ssh <2nd intermediate host> 'cat >> .ssh/authorized_keys'
+
+Sample ~/.ssh/config:
+
+Basically, the hardware is connected to the 3rd intermediary host and we want to connect to this hardware from our Host PC
+
+Host <1st intermediary host name>
+   User <your_user_name>
+   HostName <1st_intermediary_host_IP>
+
+Host <2nd intermediary host name>
+   User <your_user_name>
+   ProxyCommand ssh -W <2nd_intermediary_host_IP>:%p <1st intermediary host name>
+
+Host <3rd intermediary host name>
+   User sadiqhm
+   ProxyCommand ssh -W %h:%p <2nd intermediary host name>
+
+Host <give a name to your target>
+    User root
+    ProxyCommand ssh -W <IP of target>:%p <3rd intermediary host name>
+
+Finally, you can access the hardware from your host PC via "ssh root@<name of your target>" without entering any password.
