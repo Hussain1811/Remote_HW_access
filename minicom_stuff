@@ -1,0 +1,6 @@
+You might be able to see boot logs in the serial of minicom, but you may not reach the prompt sometimes.
+For this to work, do the following:
+
+Minicom -s ---> serial port setup ---> change serial device; make hardware flow control to "NO".
+If still it's not working, try to change the baud rate and check.
+
